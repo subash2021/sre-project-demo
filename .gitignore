@@ -1,0 +1,12 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Docker
+postgres_data/
+logs/
+
+# IDE files
+.idea/
+.vscode/
