@@ -1,37 +1,5 @@
 # Trading System Observability Platform
 
-```
-graph TD
-    subgraph "SRE / Operator (Your Browser)"
-        A[SRE User] --> B[Locust UI <br> localhost:8089];
-        A --> C[Grafana Dashboard <br> localhost:3000];
-    end
-
-    subgraph "Docker Environment (docker-compose)"
-        subgraph "Locust Load Generator"
-            B -- Manages Test --> D[Locust Master];
-            D -- Coordinates --> E[Locust Worker];
-        end
-        
-        subgraph "Application"
-            F[Flask App <br> (main.py)];
-        end
-
-        subgraph "Observability Stack"
-            G[Prometheus <br> localhost:9090];
-            C -- Queries data (PromQL) --> G;
-        end
-
-        E -- 1. Generates HTTP Load (GET / & /error) --> F;
-        G -- 2a. Scrapes App /metrics --> F;
-        G -- 2b. Scrapes Locust /stats/requests --> D;
-    end
-
-    style F fill:#f9f,stroke:#333,stroke-width:2px
-    style G fill:#9cf,stroke:#333,stroke-width:2px
-    style C fill:#9c9,stroke:#333,stroke-width:2px
-    style B fill:#f90,stroke:#333,stroke-width:2px
-```
 **Objective:** This project is a lite application built to demonstrate core Site Reliability Engineering (SRE) principles and technical abilities relevant to the Trading Operations role at GTS.
 
 It simulates a simple trading application and wraps it in a modern observability stack, focusing on the tools mentioned in the job description: **Prometheus, Grafana, Loki, Python, SQL, and Docker.**
