@@ -1,5 +1,44 @@
 # Trading System Observability Platform
 
+```mermaid
+   graph TD
+    subgraph "SRE / Operator (Your Laptop)"
+        A[SRE User] -- Runs --> B[Operational CLI <br> (Python Tool)];
+        A -- Views & Interacts --> C[Grafana Dashboard <br> localhost:3000];
+        A -- Triggers Trade/Chaos --> D[Trading App];
+    end
+
+    subgraph "Docker Environment (docker-compose)"
+        
+        subgraph "Application & Database"
+            D -- 1a. Writes Record --> E[PostgreSQL DB];
+            B -- Queries --> E;
+        end
+
+        subgraph "Logging Stack"
+            D -- 1b. Writes Log File --> F[Promtail];
+            F -- 2a. Pushes Logs --> G[Loki];
+        end
+
+        subgraph "Metrics Stack"
+            D -- 1c. Exposes /metrics --> H[Prometheus];
+            H -- 2b. Scrapes Metrics --> D;
+        end
+
+        subgraph "Unified Visualization"
+            C -- 3a. Queries Logs (LogQL) --> G;
+            C -- 3b. Queries Metrics (PromQL) --> H;
+        end
+
+    end
+
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#9c9,stroke:#333,stroke-width:2px
+    style E fill:#aef,stroke:#333,stroke-width:2px
+    style G fill:#f90,stroke:#333,stroke-width:2px
+    style H fill:#9cf,stroke:#333,stroke-width:2px
+    style B fill:#ccc,stroke:#333,stroke-width:2px
+```
 
 **Objective:** This project is a lite application built to demonstrate core Site Reliability Engineering (SRE) principles and technical abilities relevant to the Trading Operations role at GTS.
 
