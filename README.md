@@ -3,31 +3,31 @@
 ```mermaid
    graph TD
     subgraph "SRE / Operator (Your Laptop)"
-        A[SRE User] -- Runs --> B[Operational CLI <br> (Python Tool)];
-        A -- Views & Interacts --> C[Grafana Dashboard <br> localhost:3000];
+        A[SRE User] -- Runs --> B["Operational CLI\n(Python Tool)"];
+        A -- Views & Interacts --> C["Grafana Dashboard\nlocalhost:3000"];
         A -- Triggers Trade/Chaos --> D[Trading App];
     end
 
     subgraph "Docker Environment (docker-compose)"
         
         subgraph "Application & Database"
-            D -- 1a. Writes Record --> E[PostgreSQL DB];
+            D -- "1a. Writes Record" --> E[PostgreSQL DB];
             B -- Queries --> E;
         end
 
         subgraph "Logging Stack"
-            D -- 1b. Writes Log File --> F[Promtail];
-            F -- 2a. Pushes Logs --> G[Loki];
+            D -- "1b. Writes Log File" --> F[Promtail];
+            F -- "2a. Pushes Logs" --> G[Loki];
         end
 
         subgraph "Metrics Stack"
-            D -- 1c. Exposes /metrics --> H[Prometheus];
-            H -- 2b. Scrapes Metrics --> D;
+            D -- "1c. Exposes /metrics" --> H[Prometheus];
+            H -- "2b. Scrapes Metrics" --> D;
         end
 
         subgraph "Unified Visualization"
-            C -- 3a. Queries Logs (LogQL) --> G;
-            C -- 3b. Queries Metrics (PromQL) --> H;
+            C -- "3a. Queries Logs (LogQL)" --> G;
+            C -- "3b. Queries Metrics (PromQL)" --> H;
         end
 
     end
