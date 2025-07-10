@@ -68,7 +68,7 @@ It simulates a simple trading application and wraps it in a modern observability
 ### Live Demo (Screenshots)
 
 **1. The Main Grafana Dashboard**
-*(Insert a screenshot of your beautiful Grafana dashboard here)*
+*(Screenshots of Grafana dashboards goes here)*
 
 **2. Investigating an Outage with Chaos Mode**
 *(Insert a screenshot or GIF showing the dashboard during chaos mode, with high failure rates)*
