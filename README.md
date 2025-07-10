@@ -2,34 +2,42 @@
 
 ``` mermaid
 graph TD
-    subgraph "SRE / Operator"
-        A[SRE User] -- 1. Generates Traffic --> F[Flask App <br> localhost:8080];
-        A -- 4. Views Dashboards --> C[Grafana <br> localhost:3000];
+    subgraph "SRE / Operator (Your Laptop)"
+        A[SRE User] -- Runs --> B[Operational CLI <br> (Python Tool)];
+        A -- Views & Interacts --> C[Grafana Dashboard <br> localhost:3000];
+        A -- Triggers Trade/Chaos --> D[Trading App];
     end
 
     subgraph "Docker Environment (docker-compose)"
         
-        subgraph "Application"
-            F;
+        subgraph "Application & Database"
+            D -- 1a. Writes Record --> E[PostgreSQL DB];
+            B -- Queries --> E;
         end
 
-        subgraph "Observability Exporters"
-            H[Node Exporter] -- 2a. Host Metrics --> G;
-            I[cAdvisor] -- 2b. Container Metrics --> G;
+        subgraph "Logging Stack"
+            D -- 1b. Writes Log File --> F[Promtail];
+            F -- 2a. Pushes Logs --> G[Loki];
         end
 
-        subgraph "Monitoring Backend"
-            F -- 2c. Application Metrics --> G[Prometheus];
-            G -- 3. Provides All Data --> C;
+        subgraph "Metrics Stack"
+            D -- 1c. Exposes /metrics --> H[Prometheus];
+            H -- 2b. Scrapes Metrics --> D;
+        end
+
+        subgraph "Unified Visualization"
+            C -- 3a. Queries Logs (LogQL) --> G;
+            C -- 3b. Queries Metrics (PromQL) --> H;
         end
 
     end
 
-    style F fill:#f9f,stroke:#333,stroke-width:2px
-    style G fill:#9cf,stroke:#333,stroke-width:2px
+    style D fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#9c9,stroke:#333,stroke-width:2px
-    style H fill:#f90,stroke:#333,stroke-width:2px
-    style I fill:#f90,stroke:#333,stroke-width:2px
+    style E fill:#aef,stroke:#333,stroke-width:2px
+    style G fill:#f90,stroke:#333,stroke-width:2px
+    style H fill:#9cf,stroke:#333,stroke-width:2px
+    style B fill:#ccc,stroke:#333,stroke-width:2px
 ```
 **Objective:** This project is a lite application built to demonstrate core Site Reliability Engineering (SRE) principles and technical abilities relevant to the Trading Operations role at GTS.
 
