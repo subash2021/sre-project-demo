@@ -1,28 +1,5 @@
 # Trading System Observability Platform
 
-## Architecture Diagram
-
-Below is the architecture diagram for the **sre-project-demo** project, illustrating the key components and their interactions:
-
-```mermaid
-graph TD
-    A[GitHub Repository] -->|Push Code| B[GitHub Actions]
-    B -->|Build & Push| C[AWS ECR]
-    B -->|Deploy| D[AWS EKS]
-    D --> E[Microservices]
-    E -->|Metrics| F[Prometheus]
-    E -->|Logs| G[ELK Stack]
-    F -->|Visualize| H[Grafana]
-    F -->|Alerts| I[PagerDuty]
-    D -->|Traffic| J[AWS Load Balancer]
-    J -->|Route| E
-    K[AWS VPC] --> D
-    K --> L[AWS RDS]
-    K --> M[AWS S3]
-    N[Terraform] -->|Provision| K
-    O[Ansible] -->|Configure| E
-```
-
 **Objective:** This project is a lite application built to demonstrate core Site Reliability Engineering (SRE) principles and technical abilities relevant to the Trading Operations role at GTS.
 
 It simulates a simple trading application and wraps it in a modern observability stack, focusing on the tools mentioned in the job description: **Prometheus, Grafana, Loki, Python, SQL, and Docker.**
