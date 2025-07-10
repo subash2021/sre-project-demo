@@ -55,7 +55,7 @@ The entire stack is containerized and can be run with a single command.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [your-repo-url]
+    git clone https://github.com/subash2021/sre-project-demo.git
     cd trading-sre-project
     ```
 
