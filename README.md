@@ -1,7 +1,5 @@
 # Trading System Observability Platform
 
-##Architecture
-This project uses Docker Compose to orchestrate a multi-container environment that simulates a real-world SRE scenario. The architecture is designed to generate a measurable load against an application and observe its performance and reliability in real-time.
 graph TD
     subgraph "SRE / Operator (Your Browser)"
         A[SRE User] --> B[Locust UI <br> localhost:8089];
