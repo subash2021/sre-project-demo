@@ -2,6 +2,20 @@
 
 ```mermaid
    graph TD
+    %% --- THEME DEFINITIONS ---
+    %% Define styles for nodes
+    style D fill:#5d2d7a,color:#fff,stroke:#999,stroke-width:2px
+    style C fill:#006400,color:#fff,stroke:#999,stroke-width:2px
+    style E fill:#00008B,color:#fff,stroke:#999,stroke-width:2px
+    style G fill:#CC5500,color:#fff,stroke:#999,stroke-width:2px
+    style H fill:#008080,color:#fff,stroke:#999,stroke-width:2px
+    style B fill:#555,color:#fff,stroke:#999,stroke-width:2px
+    
+    %% Define style for the arrows/links
+    linkStyle default stroke:#ccc,stroke-width:1px
+
+
+    %% --- DIAGRAM STRUCTURE ---
     subgraph "SRE / Operator (Your Laptop)"
         A[SRE User] -- Runs --> B["Operational CLI\n(Python Tool)"];
         A -- Views & Interacts --> C["Grafana Dashboard\nlocalhost:3000"];
@@ -31,13 +45,6 @@
         end
 
     end
-
-    style D fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#9c9,stroke:#333,stroke-width:2px
-    style E fill:#aef,stroke:#333,stroke-width:2px
-    style G fill:#f90,stroke:#333,stroke-width:2px
-    style H fill:#9cf,stroke:#333,stroke-width:2px
-    style B fill:#ccc,stroke:#333,stroke-width:2px
 ```
 
 **Objective:** This project is a lite application built to demonstrate core Site Reliability Engineering (SRE) principles and technical abilities relevant to the Trading Operations role at GTS.
